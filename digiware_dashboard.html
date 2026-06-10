@@ -1,0 +1,333 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dw-green:#3B9E1A;
+  --dw-green-light:#4BBF22;
+  --dw-green-dim:#2A7012;
+  --dw-green-bg:#EBF7E5;
+  --dw-bg:#F5F6F4;
+  --dw-surface:#FFFFFF;
+  --dw-border:#DDE0D9;
+  --dw-text:#111210;
+  --dw-muted:#5A5D56;
+}
+body{font-family:var(--font-sans,system-ui,sans-serif);background:var(--dw-bg);color:var(--dw-text);font-size:15px;line-height:1.6}
+
+nav{
+  background:var(--dw-surface);
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 1.75rem;
+  border-bottom:2px solid var(--dw-green);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-left{display:flex;align-items:center;gap:20px}
+.logo-wrap{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:32px;height:32px;background:var(--dw-green);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-text{font-size:16px;font-weight:500;color:var(--dw-text);letter-spacing:0.01em}
+.logo-text span{color:var(--dw-green)}
+.nav-sep{width:1px;height:28px;background:var(--dw-border)}
+.nav-links{display:flex;gap:2px}
+.nav-links button{
+  background:none;border:none;
+  padding:6px 14px;border-radius:5px;
+  font-size:13px;color:var(--dw-muted);
+  cursor:pointer;transition:all 0.15s;font-family:inherit;
+}
+.nav-links button:hover{color:var(--dw-text);background:var(--dw-green-bg)}
+.nav-links button.active{color:var(--dw-green-dim);background:var(--dw-green-bg);font-weight:500}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--dw-green-bg);color:var(--dw-green-dim);border:0.5px solid rgba(59,158,26,0.3);font-weight:500}
+.nav-user{width:32px;height:32px;border-radius:50%;background:var(--dw-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;cursor:pointer}
+
+.page{display:none;animation:fade 0.2s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.hero{padding:5.5rem 2rem 4.5rem;max-width:660px;margin:0 auto;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--dw-green-bg);color:var(--dw-green-dim);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem;border:0.5px solid rgba(59,158,26,0.25)}
+.hero-dot{width:6px;height:6px;background:var(--dw-green);border-radius:50%}
+.hero h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:500;line-height:1.2;color:var(--dw-text);margin-bottom:1rem}
+.hero h1 span{color:var(--dw-green)}
+.hero p{font-size:15px;color:var(--dw-muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--dw-green);color:#fff;border:none;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.btn-primary:hover{background:var(--dw-green-light)}
+.btn-secondary{background:var(--dw-surface);color:var(--dw-text);border:0.5px solid var(--dw-border);padding:10px 22px;border-radius:7px;font-size:13px;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.btn-secondary:hover{background:var(--dw-green-bg)}
+.divider{height:0.5px;background:var(--dw-border)}
+.info-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));max-width:900px;margin:0 auto;padding:2.5rem 2rem}
+.info-item{text-align:center;padding:1rem}
+.info-item:not(:last-child){border-right:0.5px solid var(--dw-border)}
+.info-num{font-size:24px;font-weight:500;color:var(--dw-green);margin-bottom:4px}
+.info-label{font-size:13px;color:var(--dw-muted)}
+.feature-section{padding:3rem 2rem 5rem;max-width:900px;margin:0 auto}
+.sec-label{font-size:11px;font-weight:500;color:var(--dw-green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem}
+.feature-section>h2{font-size:20px;font-weight:500;margin-bottom:2rem;color:var(--dw-text)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.feat-card{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;padding:1.1rem 1.25rem;transition:border-color 0.15s}
+.feat-card:hover{border-color:var(--dw-green)}
+.feat-icon{width:34px;height:34px;background:var(--dw-green-bg);border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:0.9rem}
+.feat-icon svg{width:16px;height:16px;stroke:var(--dw-green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat-card h3{font-size:13px;font-weight:500;margin-bottom:5px;color:var(--dw-text)}
+.feat-card p{font-size:12px;color:var(--dw-muted);line-height:1.55}
+
+.dash-subheader{padding:1.5rem 2rem 1rem;border-bottom:0.5px solid var(--dw-border);background:var(--dw-surface)}
+.dash-subheader-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.dash-title h2{font-size:17px;font-weight:500;color:var(--dw-text);margin-bottom:3px}
+.dash-title p{font-size:12px;color:var(--dw-muted)}
+.dash-meta{display:flex;gap:8px;align-items:center}
+.dbadge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px}
+.dbadge.green{background:var(--dw-green-bg);color:var(--dw-green-dim);border:0.5px solid rgba(59,158,26,0.25)}
+.dbadge.gray{background:#F1F0EC;color:#5A5D56}
+.dash-body{padding:1.25rem 2rem 2rem;max-width:1200px;margin:0 auto}
+.viz-box{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;overflow:hidden}
+.viz-bar{padding:10px 16px;border-bottom:0.5px solid var(--dw-border);display:flex;align-items:center;gap:8px;background:#FAFAF8}
+.viz-dot{width:8px;height:8px;background:var(--dw-green);border-radius:50%}
+.viz-bar span{font-size:13px;font-weight:500;color:var(--dw-text)}
+.tableau-area{width:100%;position:relative}
+.tableauPlaceholder{width:100%;border:none;display:block}
+
+.about-wrap{max-width:740px;margin:0 auto;padding:4rem 2rem}
+.about-wrap h2{font-size:22px;font-weight:500;margin-bottom:1rem}
+.about-wrap .lead{font-size:15px;color:var(--dw-muted);line-height:1.8;margin-bottom:2rem}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem}
+.vm-card{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;padding:1rem 1.25rem}
+.vm-label{font-size:11px;font-weight:500;color:var(--dw-green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.vm-card p{font-size:13px;color:var(--dw-muted);line-height:1.6}
+.prod-section{margin-bottom:2rem}
+.prod-section h3{font-size:15px;font-weight:500;margin-bottom:1rem;padding-bottom:8px;border-bottom:0.5px solid var(--dw-border)}
+.prod-tags{display:flex;flex-wrap:wrap;gap:8px}
+.prod-tag{font-size:12px;padding:5px 12px;border-radius:6px;background:var(--dw-surface);border:0.5px solid var(--dw-border);color:var(--dw-text)}
+.prod-tag.hl{background:var(--dw-green-bg);border-color:rgba(59,158,26,0.3);color:var(--dw-green-dim)}
+.motto-box{background:var(--dw-green);border-radius:10px;padding:1.5rem 2rem;display:flex;align-items:center;gap:14px}
+.motto-icon{width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.motto-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.motto-text .mt{font-size:15px;font-weight:500;color:#fff;margin-bottom:3px}
+.motto-text .ms{font-size:12px;color:rgba(255,255,255,0.7)}
+
+.docs-wrap{max-width:800px;margin:0 auto;padding:4rem 2rem}
+.docs-wrap h2{font-size:22px;font-weight:500;margin-bottom:0.4rem}
+.docs-wrap>.sub{font-size:14px;color:var(--dw-muted);margin-bottom:2.5rem}
+.doc-section{margin-bottom:2rem}
+.doc-section h3{font-size:14px;font-weight:500;margin-bottom:0.75rem;padding-bottom:7px;border-bottom:0.5px solid var(--dw-border);color:var(--dw-text)}
+.doc-items{display:flex;flex-direction:column;gap:7px}
+.doc-item{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:9px;padding:0.9rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:border-color 0.15s}
+.doc-item:hover{border-color:var(--dw-green)}
+.doc-item h4{font-size:13px;font-weight:500;margin-bottom:3px;color:var(--dw-text)}
+.doc-item p{font-size:12px;color:var(--dw-muted)}
+.doc-pill{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:500;white-space:nowrap}
+.doc-pill.new{background:var(--dw-green-bg);color:var(--dw-green-dim)}
+.doc-pill.guide{background:#EEF6E8;color:#2A7012}
+.doc-pill.ref{background:#F1F0EC;color:#5A5D56}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">DigiWare — Sistem internal dashboard analisis pelanggan.</h2>
+
+<nav>
+  <div class="nav-left">
+    <div class="logo-wrap" onclick="showPage('home')">
+      <div class="logo-icon">
+        <svg viewBox="0 0 18 18"><polyline points="2,13 6,8 10,11 16,4"/><polyline points="12,4 16,4 16,8"/></svg>
+      </div>
+      <span class="logo-text">Digi<span>Ware</span></span>
+    </div>
+    <div class="nav-sep"></div>
+    <div class="nav-links">
+      <button class="active" id="nav-home" onclick="showPage('home')">Beranda</button>
+      <button id="nav-dashboard" onclick="showPage('dashboard')">Dashboard</button>
+      <button id="nav-about" onclick="showPage('about')">Tentang</button>
+      <button id="nav-docs" onclick="showPage('docs')">Dokumentasi</button>
+    </div>
+  </div>
+  <div class="nav-right">
+    <span class="nav-badge">Internal</span>
+    <div class="nav-user">DW</div>
+  </div>
+</nav>
+
+<!-- BERANDA -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge"><div class="hero-dot"></div>Sistem Internal DigiWare</div>
+    <h1>Dashboard analisis<br><span>pelanggan DigiWare</span></h1>
+    <p>Portal internal ini menampilkan dashboard analisis pelanggan DigiWare untuk mendukung pemantauan penjualan, pemahaman perilaku pelanggan, dan pengambilan keputusan berbasis data.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="showPage('dashboard')">Buka Dashboard</button>
+      <button class="btn-secondary" onclick="showPage('docs')">Lihat Dokumentasi</button>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <div class="info-item"><div class="info-num">4 RFM</div><div class="info-label">segmen pelanggan</div></div>
+    <div class="info-item"><div class="info-num">360°</div><div class="info-label">pandangan pelanggan</div></div>
+    <div class="info-item"><div class="info-num">Tableau</div><div class="info-label">visualisasi data</div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="feature-section">
+    <div class="sec-label">Fitur Utama</div>
+    <h2>Apa yang bisa kamu pantau</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <h3>Segmentasi pelanggan</h3>
+        <p>Pengelompokan RFM untuk mengidentifikasi pelanggan bernilai tinggi, setia, dan berisiko.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/></svg></div>
+        <h3>Tren pembelian</h3>
+        <p>Pantau frekuensi dan nilai transaksi pelanggan dari waktu ke waktu.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Analisis produk</h3>
+        <p>Lihat komponen dan kategori mana yang paling diminati pelanggan DigiWare.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg></div>
+        <h3>Sinyal retensi</h3>
+        <p>Deteksi awal pelanggan yang mulai tidak aktif sebelum benar-benar pergi.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page">
+  <div class="dash-subheader">
+    <div class="dash-subheader-inner">
+      <div class="dash-title">
+        <h2>Dashboard analisis pelanggan</h2>
+        <p>Perilaku pelanggan &amp; insight produk e-commerce DigiWare</p>
+      </div>
+      <div class="dash-meta">
+        <span class="dbadge green">Aktif</span>
+        <span class="dbadge gray">Tableau Embedded</span>
+      </div>
+    </div>
+  </div>
+  <div class="dash-body">
+    <div class="viz-box">
+      <div class="viz-bar">
+        <div class="viz-dot"></div>
+        <span>Executive summary — analisis pelanggan</span>
+      </div>
+      <div class="tableau-area">
+        <div class="tableauPlaceholder" id="viz1775992970918" style="position:relative">
+          <noscript><a href="#"><img alt="Dashboard Analisis Pelanggan — Perilaku Pelanggan &amp; Insight Produk E-Commerce DigiWare" src="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1_rss.png" style="border:none"/></a></noscript>
+          <object class="tableauViz" style="display:none">
+            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+            <param name="embed_code_version" value="3"/>
+            <param name="site_root" value=""/>
+            <param name="name" value="DashboardPA_17728374736970/ExecutiveSummary"/>
+            <param name="tabs" value="no"/>
+            <param name="toolbar" value="yes"/>
+            <param name="static_image" value="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1.png"/>
+            <param name="animate_transition" value="yes"/>
+            <param name="display_static_image" value="yes"/>
+            <param name="display_spinner" value="yes"/>
+            <param name="display_overlay" value="yes"/>
+            <param name="display_count" value="yes"/>
+            <param name="language" value="en-US"/>
+            <param name="filter" value="publish=yes"/>
+          </object>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TENTANG -->
+<div id="page-about" class="page">
+  <div class="about-wrap">
+    <div class="sec-label">Tentang DigiWare</div>
+    <h2>Unlimited Innovation</h2>
+    <p class="lead">DigiWare menyediakan berbagai komponen elektronik secara umum dengan kekhususan pada komponen digital. Sejak awal berdiri, DigiWare berkomitmen memberikan pelayanan terbaik kepada pelanggan — mulai dari penyediaan datasheet komponen, dukungan teknis, hingga outsourcing komponen yang sulit ditemukan di pasaran.</p>
+    <div class="vm-grid">
+      <div class="vm-card"><div class="vm-label">Visi</div><p>Menjadi penyedia komponen elektronik yang lengkap, inovatif, dan berwawasan global.</p></div>
+      <div class="vm-card"><div class="vm-label">Misi</div><p>Menjadi mitra utama bagi lembaga edukasi, industri, dan penggemar elektronika dalam mengembangkan dunia elektronika di Indonesia.</p></div>
+    </div>
+    <div class="prod-section">
+      <h3>Produk &amp; Spesialisasi</h3>
+      <div class="prod-tags">
+        <span class="prod-tag hl">Mikrokontroler</span>
+        <span class="prod-tag hl">Mikroprosesor</span>
+        <span class="prod-tag hl">Sensor</span>
+        <span class="prod-tag hl">Robotika</span>
+        <span class="prod-tag hl">GPS &amp; RFID</span>
+        <span class="prod-tag hl">Embedded Module (IoT)</span>
+        <span class="prod-tag hl">Voice Recognition</span>
+        <span class="prod-tag hl">CMUcam</span>
+        <span class="prod-tag">Komponen elektronik umum</span>
+        <span class="prod-tag">Dukungan teknis</span>
+        <span class="prod-tag">Datasheet komponen</span>
+        <span class="prod-tag">Outsourcing komponen langka</span>
+      </div>
+    </div>
+    <div class="motto-box">
+      <div class="motto-icon"><svg viewBox="0 0 18 18"><polygon points="9,2 11.5,7 17,7.5 13,11.5 14.5,17 9,14 3.5,17 5,11.5 1,7.5 6.5,7"/></svg></div>
+      <div class="motto-text">
+        <div class="mt">"Unlimited Innovation"</div>
+        <div class="ms">Inovasi tanpa batas demi kepuasan pelanggan — moto DigiWare</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOKUMENTASI -->
+<div id="page-docs" class="page">
+  <div class="docs-wrap">
+    <h2>Dokumentasi</h2>
+    <p class="sub">Panduan dan referensi untuk penggunaan dashboard analisis pelanggan DigiWare.</p>
+    <div class="doc-section">
+      <h3>Mulai dari sini</h3>
+      <div class="doc-items">
+        <div class="doc-item"><div><h4>Gambaran umum sistem</h4><p>Cara kerja dashboard analisis pelanggan DigiWare</p></div><span class="doc-pill guide">Panduan</span></div>
+        <div class="doc-item"><div><h4>Menghubungkan sumber data</h4><p>Sinkronisasi data transaksi dari sistem penjualan</p></div><span class="doc-pill new">Baru</span></div>
+        <div class="doc-item"><div><h4>Navigasi dashboard</h4><p>Cara membaca dan menggunakan visualisasi Tableau</p></div><span class="doc-pill guide">Panduan</span></div>
+      </div>
+    </div>
+    <div class="doc-section">
+      <h3>Modul analitik</h3>
+      <div class="doc-items">
+        <div class="doc-item"><div><h4>Segmentasi RFM</h4><p>Penjelasan penilaian recency, frequency, dan monetary</p></div><span class="doc-pill ref">Referensi</span></div>
+        <div class="doc-item"><div><h4>Kohort perilaku</h4><p>Melacak kelompok pelanggan di berbagai periode waktu</p></div><span class="doc-pill ref">Referensi</span></div>
+        <div class="doc-item"><div><h4>Prediksi churn</h4><p>Cara sinyal pelanggan berisiko dihitung dan diinterpretasikan</p></div><span class="doc-pill new">Baru</span></div>
+      </div>
+    </div>
+    <div class="doc-section">
+      <h3>Integrasi</h3>
+      <div class="doc-items">
+        <div class="doc-item"><div><h4>Panduan embed Tableau</h4><p>Cara menyematkan dashboard ke portal internal</p></div><span class="doc-pill guide">Panduan</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  var nb=document.getElementById('nav-'+id);
+  if(nb)nb.classList.add('active');
+  if(id==='dashboard'&&!window.tableauLoaded){
+    window.tableauLoaded=true;
+    var d=document.getElementById('viz1775992970918');
+    var v=d.getElementsByTagName('object')[0];
+    if(d.offsetWidth>800){v.style.width='100%';v.style.height=(d.offsetWidth*0.75)+'px';}
+    else if(d.offsetWidth>500){v.style.width='100%';v.style.height=(d.offsetWidth*0.75)+'px';}
+    else{v.style.width='100%';v.style.height='1877px';}
+    v.style.display='block';
+    var s=document.createElement('script');
+    s.src='https://public.tableau.com/javascripts/api/viz_v1.js';
+    v.parentNode.insertBefore(s,v);
+  }
+}
+</script>
