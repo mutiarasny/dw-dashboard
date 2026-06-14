@@ -1,71 +1,41 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DigiWare — Dashboard Analisis Pelanggan</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --dw-green:#3B9E1A;
-  --dw-green-light:#4BBF22;
-  --dw-green-dim:#2A7012;
-  --dw-green-bg:#EBF7E5;
-  --dw-bg:#F5F6F4;
-  --dw-surface:#FFFFFF;
-  --dw-border:#DDE0D9;
-  --dw-text:#111210;
-  --dw-muted:#5A5D56;
+  --dw-green:#3B9E1A;--dw-green-light:#4BBF22;--dw-green-dim:#2A7012;
+  --dw-green-bg:#EBF7E5;--dw-bg:#F5F6F4;--dw-surface:#FFFFFF;
+  --dw-border:#DDE0D9;--dw-text:#111210;--dw-muted:#5A5D56;
 }
-body{font-family:var(--font-sans,system-ui,sans-serif);background:var(--dw-bg);color:var(--dw-text);font-size:15px;line-height:1.6}
-
-nav{
-  background:var(--dw-surface);
-  height:60px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 1.75rem;
-  border-bottom:2px solid var(--dw-green);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
+body{font-family:system-ui,sans-serif;background:var(--dw-bg);color:var(--dw-text);font-size:15px;line-height:1.6}
+nav{background:var(--dw-surface);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.75rem;border-bottom:2px solid var(--dw-green);position:sticky;top:0;z-index:100}
 .nav-left{display:flex;align-items:center;gap:20px}
 .logo-wrap{display:flex;align-items:center;gap:10px;cursor:pointer}
 .logo-icon{width:32px;height:32px;background:var(--dw-green);border-radius:6px;display:flex;align-items:center;justify-content:center}
 .logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.logo-text{font-size:16px;font-weight:500;color:var(--dw-text);letter-spacing:0.01em}
+.logo-text{font-size:16px;font-weight:500;color:var(--dw-text)}
 .logo-text span{color:var(--dw-green)}
 .nav-sep{width:1px;height:28px;background:var(--dw-border)}
 .nav-links{display:flex;gap:2px}
-.nav-links button{
-  background:none;border:none;
-  padding:6px 14px;border-radius:5px;
-  font-size:13px;color:var(--dw-muted);
-  cursor:pointer;transition:all 0.15s;font-family:inherit;
-}
+.nav-links button{background:none;border:none;padding:6px 14px;border-radius:5px;font-size:13px;color:var(--dw-muted);cursor:pointer;font-family:inherit;transition:all 0.15s}
 .nav-links button:hover{color:var(--dw-text);background:var(--dw-green-bg)}
 .nav-links button.active{color:var(--dw-green-dim);background:var(--dw-green-bg);font-weight:500}
 .nav-right{display:flex;align-items:center;gap:10px}
 .nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--dw-green-bg);color:var(--dw-green-dim);border:0.5px solid rgba(59,158,26,0.3);font-weight:500}
 .nav-user{width:32px;height:32px;border-radius:50%;background:var(--dw-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;cursor:pointer}
-
 .page{display:none;animation:fade 0.2s ease}
 .page.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
+/* Beranda */
 .hero{padding:5.5rem 2rem 4.5rem;max-width:660px;margin:0 auto;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--dw-green-bg);color:var(--dw-green-dim);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem;border:0.5px solid rgba(59,158,26,0.25)}
 .hero-dot{width:6px;height:6px;background:var(--dw-green);border-radius:50%}
-.hero h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:500;line-height:1.2;color:var(--dw-text);margin-bottom:1rem}
+.hero h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:500;line-height:1.2;margin-bottom:1rem}
 .hero h1 span{color:var(--dw-green)}
 .hero p{font-size:15px;color:var(--dw-muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-primary{background:var(--dw-green);color:#fff;border:none;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:background 0.15s}
 .btn-primary:hover{background:var(--dw-green-light)}
-.btn-secondary{background:var(--dw-surface);color:var(--dw-text);border:0.5px solid var(--dw-border);padding:10px 22px;border-radius:7px;font-size:13px;cursor:pointer;font-family:inherit;transition:background 0.15s}
-.btn-secondary:hover{background:var(--dw-green-bg)}
 .divider{height:0.5px;background:var(--dw-border)}
 .info-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));max-width:900px;margin:0 auto;padding:2.5rem 2rem}
 .info-item{text-align:center;padding:1rem}
@@ -74,45 +44,81 @@ nav{
 .info-label{font-size:13px;color:var(--dw-muted)}
 .feature-section{padding:3rem 2rem 5rem;max-width:900px;margin:0 auto}
 .sec-label{font-size:11px;font-weight:500;color:var(--dw-green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem}
-.feature-section>h2{font-size:20px;font-weight:500;margin-bottom:2rem;color:var(--dw-text)}
+.feature-section>h2{font-size:20px;font-weight:500;margin-bottom:2rem}
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .feat-card{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;padding:1.1rem 1.25rem;transition:border-color 0.15s}
 .feat-card:hover{border-color:var(--dw-green)}
 .feat-icon{width:34px;height:34px;background:var(--dw-green-bg);border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:0.9rem}
 .feat-icon svg{width:16px;height:16px;stroke:var(--dw-green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.feat-card h3{font-size:13px;font-weight:500;margin-bottom:5px;color:var(--dw-text)}
+.feat-card h3{font-size:13px;font-weight:500;margin-bottom:5px}
 .feat-card p{font-size:12px;color:var(--dw-muted);line-height:1.55}
 
-.dash-subheader{padding:1.5rem 2rem 1rem;border-bottom:0.5px solid var(--dw-border);background:var(--dw-surface)}
-.dash-subheader-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.dash-title h2{font-size:17px;font-weight:500;color:var(--dw-text);margin-bottom:3px}
+/* Dashboard */
+.dash-subheader{padding:1.25rem 2rem 1rem;border-bottom:0.5px solid var(--dw-border);background:var(--dw-surface)}
+.dash-subheader-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.dash-title h2{font-size:17px;font-weight:500;margin-bottom:3px}
 .dash-title p{font-size:12px;color:var(--dw-muted)}
 .dash-meta{display:flex;gap:8px;align-items:center}
 .dbadge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px}
 .dbadge.green{background:var(--dw-green-bg);color:var(--dw-green-dim);border:0.5px solid rgba(59,158,26,0.25)}
 .dbadge.gray{background:#F1F0EC;color:#5A5D56}
-.dash-body{padding:1.25rem 2rem 2rem;max-width:1200px;margin:0 auto}
+
+/* Dashboard body */
+.dash-body{padding:1.25rem 2rem 2rem;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem}
+
+/* Baris utama: viz + sidebar */
+.dash-main-row{display:flex;gap:1.25rem;align-items:flex-start}
+.dash-viz-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:0}
 .viz-box{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;overflow:hidden}
-.viz-bar{padding:10px 16px;border-bottom:0.5px solid var(--dw-border);display:flex;align-items:center;gap:8px;background:#FAFAF8}
-.viz-dot{width:8px;height:8px;background:var(--dw-green);border-radius:50%}
-.viz-bar span{font-size:13px;font-weight:500;color:var(--dw-text)}
+.viz-bar{padding:9px 14px;border-bottom:0.5px solid var(--dw-border);display:flex;align-items:center;gap:8px;background:#FAFAF8}
+.viz-dot{width:8px;height:8px;background:var(--dw-green);border-radius:50%;flex-shrink:0}
+.viz-bar span{font-size:13px;font-weight:500}
+.tableau-wrapper{width:100%;height:680px;overflow:hidden}
+.tableau-wrapper .tableauPlaceholder{width:100%;height:100%}
+.tableau-wrapper .tableauViz{width:100%!important;height:100%!important}
 
-/* ── Tableau embed: rasio 16:9 (sesuai layar Lenovo IdeaPad Slim 3) ── */
-.tableau-wrapper{
-  position:relative;
-  width:100%;
-  padding-bottom:56.25%;
-}
-.tableau-wrapper .tableauPlaceholder{
-  position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
-}
-.tableau-wrapper .tableauViz{
-  width:100%!important;
-  height:100%!important;
-}
+/* Sidebar panduan navigasi */
+.dash-nav-sidebar{width:210px;flex-shrink:0;background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;overflow:hidden;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow-y:auto}
+.sidebar-header{padding:10px 14px;border-bottom:0.5px solid var(--dw-border);background:#FAFAF8;display:flex;align-items:center;gap:7px}
+.sidebar-header svg{width:14px;height:14px;stroke:var(--dw-green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.sidebar-header span{font-size:12px;font-weight:500;color:var(--dw-text)}
+.sidebar-body{padding:10px 14px;display:flex;flex-direction:column;gap:10px}
+.sb-item{display:flex;gap:8px;align-items:flex-start}
+.sb-dot{width:6px;height:6px;background:var(--dw-green);border-radius:50%;flex-shrink:0;margin-top:5px}
+.sb-item p{font-size:11.5px;color:var(--dw-muted);line-height:1.5}
+.sb-item p strong{color:var(--dw-text);font-size:11.5px}
+.sidebar-tip{padding:8px 14px;border-top:0.5px solid var(--dw-border);background:var(--dw-green-bg)}
+.sidebar-tip p{font-size:11px;color:var(--dw-green-dim);line-height:1.5}
 
+/* Panduan halaman */
+.pg-section{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:10px;overflow:hidden}
+.pg-section-header{padding:11px 16px;border-bottom:0.5px solid var(--dw-border);background:#FAFAF8;display:flex;align-items:center;gap:8px}
+.pg-section-header svg{width:15px;height:15px;stroke:var(--dw-green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.pg-section-header span{font-size:13px;font-weight:500}
+.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:1.25rem}
+@media(max-width:700px){.pg-grid{grid-template-columns:1fr}}
+.pg-card2{background:#fff;border:1px solid var(--dw-border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);transition:box-shadow 0.15s,border-color 0.15s}
+.pg-card2:hover{box-shadow:0 4px 16px rgba(59,158,26,0.1);border-color:rgba(59,158,26,0.3)}
+.pg-thumb2{background:#f2f5f0;border-bottom:1px solid var(--dw-border);padding:16px 16px 12px;display:flex;align-items:center;justify-content:center}
+.pg-thumb2 svg{width:100%;height:auto;display:block;border-radius:7px;box-shadow:0 2px 10px rgba(0,0,0,0.12)}
+.pg-footer{padding:12px 16px 14px}
+.pg-title-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.pg-green-dot{width:10px;height:10px;background:var(--dw-green);border-radius:50%;flex-shrink:0}
+.pg-page-name{font-size:14px;font-weight:600;color:var(--dw-text)}
+.pg-btn{display:inline-flex;align-items:center;gap:6px;background:var(--dw-green-bg);border:1px solid rgba(59,158,26,0.25);color:var(--dw-green-dim);padding:6px 14px;border-radius:8px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:all 0.15s;width:100%}
+.pg-btn:hover{background:#d8f0cc}
+.pg-btn svg{width:13px;height:13px;stroke:var(--dw-green-dim);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform 0.2s;margin-left:auto;flex-shrink:0}
+.pg-btn.open svg{transform:rotate(180deg)}
+.pg-detail2{display:none;border-top:0.5px solid var(--dw-border);background:#FAFCF8}
+.pg-detail2.open{display:block}
+.pg-detail2-inner{padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.pg-detail2-item{display:flex;gap:8px;align-items:flex-start}
+.pg-detail2-dot{width:6px;height:6px;background:var(--dw-green);border-radius:50%;flex-shrink:0;margin-top:5px}
+.pg-detail2-item p{font-size:11.5px;color:var(--dw-muted);line-height:1.5}
+.pg-detail2-item p strong{color:var(--dw-text);font-weight:500}
+.pg-detail2-tip{font-size:11px;color:var(--dw-green-dim);background:var(--dw-green-bg);border-radius:6px;padding:6px 10px;border:0.5px solid rgba(59,158,26,0.2);margin:0 16px 12px}
+
+/* Tentang */
 .about-wrap{max-width:740px;margin:0 auto;padding:4rem 2rem}
 .about-wrap h2{font-size:22px;font-weight:500;margin-bottom:1rem}
 .about-wrap .lead{font-size:15px;color:var(--dw-muted);line-height:1.8;margin-bottom:2rem}
@@ -123,38 +129,20 @@ nav{
 .prod-section{margin-bottom:2rem}
 .prod-section h3{font-size:15px;font-weight:500;margin-bottom:1rem;padding-bottom:8px;border-bottom:0.5px solid var(--dw-border)}
 .prod-tags{display:flex;flex-wrap:wrap;gap:8px}
-.prod-tag{font-size:12px;padding:5px 12px;border-radius:6px;background:var(--dw-surface);border:0.5px solid var(--dw-border);color:var(--dw-text)}
+.prod-tag{font-size:12px;padding:5px 12px;border-radius:6px;background:var(--dw-surface);border:0.5px solid var(--dw-border)}
 .prod-tag.hl{background:var(--dw-green-bg);border-color:rgba(59,158,26,0.3);color:var(--dw-green-dim)}
 .motto-box{background:var(--dw-green);border-radius:10px;padding:1.5rem 2rem;display:flex;align-items:center;gap:14px}
 .motto-icon{width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .motto-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .motto-text .mt{font-size:15px;font-weight:500;color:#fff;margin-bottom:3px}
 .motto-text .ms{font-size:12px;color:rgba(255,255,255,0.7)}
-
-.docs-wrap{max-width:800px;margin:0 auto;padding:4rem 2rem}
-.docs-wrap h2{font-size:22px;font-weight:500;margin-bottom:0.4rem}
-.docs-wrap>.sub{font-size:14px;color:var(--dw-muted);margin-bottom:2.5rem}
-.doc-section{margin-bottom:2rem}
-.doc-section h3{font-size:14px;font-weight:500;margin-bottom:0.75rem;padding-bottom:7px;border-bottom:0.5px solid var(--dw-border);color:var(--dw-text)}
-.doc-items{display:flex;flex-direction:column;gap:7px}
-.doc-item{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:9px;padding:0.9rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:border-color 0.15s}
-.doc-item:hover{border-color:var(--dw-green)}
-.doc-item h4{font-size:13px;font-weight:500;margin-bottom:3px;color:var(--dw-text)}
-.doc-item p{font-size:12px;color:var(--dw-muted)}
-.doc-pill{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:500;white-space:nowrap}
-.doc-pill.new{background:var(--dw-green-bg);color:var(--dw-green-dim)}
-.doc-pill.guide{background:#EEF6E8;color:#2A7012}
-.doc-pill.ref{background:#F1F0EC;color:#5A5D56}
 </style>
 
-<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">DigiWare — Sistem internal dashboard analisis pelanggan.</h2>
-
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">DigiWare</h2>
 <nav>
   <div class="nav-left">
     <div class="logo-wrap" onclick="showPage('home')">
-      <div class="logo-icon">
-        <svg viewBox="0 0 18 18"><polyline points="2,13 6,8 10,11 16,4"/><polyline points="12,4 16,4 16,8"/></svg>
-      </div>
+      <div class="logo-icon"><svg viewBox="0 0 18 18"><polyline points="2,13 6,8 10,11 16,4"/><polyline points="12,4 16,4 16,8"/></svg></div>
       <span class="logo-text">Digi<span>Ware</span></span>
     </div>
     <div class="nav-sep"></div>
@@ -162,7 +150,6 @@ nav{
       <button class="active" id="nav-home" onclick="showPage('home')">Beranda</button>
       <button id="nav-dashboard" onclick="showPage('dashboard')">Dashboard</button>
       <button id="nav-about" onclick="showPage('about')">Tentang</button>
-      <button id="nav-docs" onclick="showPage('docs')">Dokumentasi</button>
     </div>
   </div>
   <div class="nav-right">
@@ -177,10 +164,7 @@ nav{
     <div class="hero-badge"><div class="hero-dot"></div>Sistem Internal DigiWare</div>
     <h1>Dashboard analisis<br><span>pelanggan DigiWare</span></h1>
     <p>Portal internal ini menampilkan dashboard analisis pelanggan DigiWare untuk mendukung pemantauan penjualan, pemahaman perilaku pelanggan, dan pengambilan keputusan berbasis data.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="showPage('dashboard')">Buka Dashboard</button>
-      <button class="btn-secondary" onclick="showPage('docs')">Lihat Dokumentasi</button>
-    </div>
+    <div class="hero-actions"><button class="btn-primary" onclick="showPage('dashboard')">Buka Dashboard</button></div>
   </div>
   <div class="divider"></div>
   <div class="info-row">
@@ -193,26 +177,10 @@ nav{
     <div class="sec-label">Fitur Utama</div>
     <h2>Apa yang bisa kamu pantau</h2>
     <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <h3>Segmentasi pelanggan</h3>
-        <p>Pengelompokan RFM untuk mengidentifikasi pelanggan bernilai tinggi, setia, dan berisiko.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/></svg></div>
-        <h3>Tren pembelian</h3>
-        <p>Pantau frekuensi dan nilai transaksi pelanggan dari waktu ke waktu.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-        <h3>Analisis produk</h3>
-        <p>Lihat komponen dan kategori mana yang paling diminati pelanggan DigiWare.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg></div>
-        <h3>Sinyal retensi</h3>
-        <p>Deteksi awal pelanggan yang mulai tidak aktif sebelum benar-benar pergi.</p>
-      </div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><h3>Segmentasi pelanggan</h3><p>Pengelompokan RFM untuk mengidentifikasi pelanggan bernilai tinggi, setia, dan berisiko.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/></svg></div><h3>Tren pembelian</h3><p>Pantau frekuensi dan nilai transaksi pelanggan dari waktu ke waktu.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>Analisis produk</h3><p>Lihat komponen dan kategori mana yang paling diminati pelanggan DigiWare.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg></div><h3>Sinyal retensi</h3><p>Deteksi awal pelanggan yang mulai tidak aktif sebelum benar-benar pergi.</p></div>
     </div>
   </div>
 </div>
@@ -221,42 +189,419 @@ nav{
 <div id="page-dashboard" class="page">
   <div class="dash-subheader">
     <div class="dash-subheader-inner">
-      <div class="dash-title">
-        <h2>Dashboard analisis pelanggan</h2>
-        <p>Perilaku pelanggan &amp; insight produk e-commerce DigiWare</p>
-      </div>
-      <div class="dash-meta">
-        <span class="dbadge green">Aktif</span>
-        <span class="dbadge gray">Tableau Embedded</span>
-      </div>
+      <div class="dash-title"><h2>Dashboard analisis pelanggan</h2><p>Perilaku pelanggan &amp; insight produk e-commerce DigiWare</p></div>
+      <div class="dash-meta"><span class="dbadge green">Aktif</span><span class="dbadge gray">Tableau Embedded</span></div>
     </div>
   </div>
   <div class="dash-body">
-    <div class="viz-box">
-      <div class="viz-bar">
-        <div class="viz-dot"></div>
-        <span>Executive summary — analisis pelanggan</span>
-      </div>
-      <div class="tableau-wrapper">
-        <div class="tableauPlaceholder" id="viz1775992970918">
-          <noscript><a href="#"><img alt="Dashboard Analisis Pelanggan — Perilaku Pelanggan &amp; Insight Produk E-Commerce DigiWare" src="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1_rss.png" style="border:none"/></a></noscript>
-          <object class="tableauViz" style="display:none">
-            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
-            <param name="embed_code_version" value="3"/>
-            <param name="site_root" value=""/>
-            <param name="name" value="DashboardPA_17728374736970/ExecutiveSummary"/>
-            <param name="tabs" value="no"/>
-            <param name="toolbar" value="yes"/>
-            <param name="static_image" value="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1.png"/>
-            <param name="animate_transition" value="yes"/>
-            <param name="display_static_image" value="yes"/>
-            <param name="display_spinner" value="yes"/>
-            <param name="display_overlay" value="yes"/>
-            <param name="display_count" value="yes"/>
-            <param name="language" value="en-US"/>
-            <param name="filter" value="publish=yes"/>
-          </object>
+
+    <!-- Baris utama: Tableau + sidebar navigasi -->
+    <div class="dash-main-row">
+      <!-- Tableau -->
+      <div class="dash-viz-col">
+        <div class="viz-box">
+          <div class="viz-bar"><div class="viz-dot"></div><span>Executive summary — analisis pelanggan</span></div>
+          <div class="tableau-wrapper">
+            <div class="tableauPlaceholder" id="viz1775992970918" style="width:100%;height:100%">
+              <noscript><a href="#"><img alt="Dashboard Analisis Pelanggan" src="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1_rss.png" style="border:none"/></a></noscript>
+              <object class="tableauViz" style="display:none;width:100%;height:100%">
+                <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+                <param name="embed_code_version" value="3"/>
+                <param name="site_root" value=""/>
+                <param name="name" value="DashboardPA_17728374736970/ExecutiveSummary"/>
+                <param name="tabs" value="no"/>
+                <param name="toolbar" value="yes"/>
+                <param name="static_image" value="https://public.tableau.com/static/images/Da/DashboardPA_17728374736970/ExecutiveSummary/1.png"/>
+                <param name="animate_transition" value="yes"/>
+                <param name="display_static_image" value="yes"/>
+                <param name="display_spinner" value="yes"/>
+                <param name="display_overlay" value="yes"/>
+                <param name="display_count" value="yes"/>
+                <param name="language" value="en-US"/>
+                <param name="filter" value="publish=yes"/>
+              </object>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Sidebar panduan navigasi -->
+      <div class="dash-nav-sidebar">
+        <div class="sidebar-header">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01M12 12v4"/></svg>
+          <span>Panduan Navigasi</span>
+        </div>
+        <div class="sidebar-body">
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Filter Segmen:</strong> Gunakan panel kanan pada visualisasi untuk memfilter data berdasarkan kategori pelanggan.</p></div>
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Interaksi Hover:</strong> Arahkan kursor ke grafik untuk melihat detail angka transaksi dan persentase tepatnya.</p></div>
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Drill-down:</strong> Klik pada salah satu diagram batang untuk memfilter tampilan data di visualisasi lainnya secara otomatis.</p></div>
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Reset Tampilan:</strong> Klik tombol "Revert" di toolbar Tableau jika ingin mengembalikan filter ke pengaturan awal.</p></div>
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Ekspor Data:</strong> Gunakan ikon "Download" di baris toolbar bawah untuk mengunduh laporan dalam format PDF atau gambar.</p></div>
+          <div class="sb-item"><div class="sb-dot"></div><p><strong>Layar Penuh:</strong> Klik ikon fullscreen di toolbar untuk tampilan lebih luas, ideal saat presentasi.</p></div>
+        </div>
+        <div class="sidebar-tip"><p>💡 Klik elemen grafik mana saja untuk menyorot data terkait secara lintas chart.</p></div>
+      </div>
+    </div>
+
+    <!-- Panduan halaman: grid 2 kolom -->
+    <div class="pg-section">
+      <div class="pg-section-header">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span>Panduan membaca tiap halaman dashboard</span>
+      </div>
+      <div class="pg-grid">
+
+        <!-- 1. Ringkasan Utama -->
+        <div class="pg-card2">
+          <div class="pg-thumb2">
+            <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+              <rect width="480" height="270" rx="6" fill="#f0f4ee"/>
+              <rect x="0" y="0" width="480" height="42" rx="6" fill="#1a7a10"/>
+              <rect x="0" y="36" width="480" height="6" fill="#1a7a10"/>
+              <text x="22" y="19" font-size="10.5" fill="rgba(255,255,255,0.55)" font-family="system-ui">Dashboard Analisis Pelanggan</text>
+              <text x="22" y="33" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui">Perilaku Pelanggan &amp; Insight Produk</text>
+              <!-- KPI 4 -->
+              <rect x="14" y="52" width="106" height="42" rx="4" fill="#3B9E1A"/>
+              <text x="67" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Total Pelanggan</text>
+              <text x="67" y="84" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">2,140</text>
+              <rect x="126" y="52" width="106" height="42" rx="4" fill="#1a7a10"/>
+              <text x="179" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Total Transaksi</text>
+              <text x="179" y="84" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">2,607</text>
+              <rect x="238" y="52" width="106" height="42" rx="4" fill="#2d6e12"/>
+              <text x="291" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Total Pendapatan</text>
+              <text x="291" y="84" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">Rp3.31B</text>
+              <rect x="350" y="52" width="116" height="42" rx="4" fill="#4a7abf"/>
+              <text x="408" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Rata-Rata Transaksi</text>
+              <text x="408" y="84" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">Rp1.27M</text>
+              <!-- Line chart -->
+              <rect x="14" y="102" width="288" height="106" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="158" y="116" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Total Penjualan per Bulan</text>
+              <polyline points="28,190 50,180 72,196 96,158 118,165 140,170 162,176 184,182 206,173 228,178 252,175 274,182" fill="none" stroke="#3B9E1A" stroke-width="2"/>
+              <line x1="28" y1="172" x2="280" y2="172" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="34" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Jan</text><text x="80" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Mar</text>
+              <text x="130" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Mei</text><text x="180" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Jul</text>
+              <text x="228" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Sep</text><text x="260" y="206" font-size="6.5" fill="#aaa" font-family="system-ui">Nov</text>
+              <!-- Pie -->
+              <rect x="308" y="102" width="158" height="106" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="387" y="116" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Distribusi Segmen</text>
+              <circle cx="366" cy="162" r="34" fill="none" stroke="#3B9E1A" stroke-width="20" stroke-dasharray="132 78" stroke-dashoffset="0"/>
+              <circle cx="366" cy="162" r="34" fill="none" stroke="#f0b429" stroke-width="20" stroke-dasharray="50 160" stroke-dashoffset="-132"/>
+              <circle cx="366" cy="162" r="34" fill="none" stroke="#e05a2a" stroke-width="20" stroke-dasharray="14 196" stroke-dashoffset="-182"/>
+              <text x="410" y="145" font-size="6.5" fill="#555" font-family="system-ui">Low 89.77%</text>
+              <text x="410" y="158" font-size="6.5" fill="#555" font-family="system-ui">Med 7.76%</text>
+              <text x="410" y="171" font-size="6.5" fill="#555" font-family="system-ui">High 2.29%</text>
+              <!-- bar terlaris -->
+              <rect x="14" y="216" width="452" height="42" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="240" y="229" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Produk Terlaris</text>
+              <rect x="22" y="235" width="205" height="7" rx="2" fill="#3B9E1A" opacity="0.85"/>
+              <rect x="22" y="245" width="202" height="7" rx="2" fill="#3B9E1A" opacity="0.65"/>
+              <text x="232" y="241" font-size="6.5" fill="#666" font-family="system-ui">1,928</text>
+              <text x="232" y="251" font-size="6.5" fill="#666" font-family="system-ui">1,915</text>
+              <rect x="260" y="235" width="175" height="7" rx="2" fill="#3B9E1A" opacity="0.5"/>
+              <rect x="260" y="245" width="120" height="7" rx="2" fill="#3B9E1A" opacity="0.35"/>
+              <text x="440" y="241" font-size="6.5" fill="#666" font-family="system-ui">1,783</text>
+              <text x="440" y="251" font-size="6.5" fill="#666" font-family="system-ui">927</text>
+            </svg>
+          </div>
+          <div class="pg-footer">
+            <div class="pg-title-row"><div class="pg-green-dot"></div><div class="pg-page-name">Ringkasan Utama</div></div>
+            <button class="pg-btn" onclick="toggleDetail2(this)">Lihat Penjelasan <svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></button>
+          </div>
+          <div class="pg-detail2">
+            <div class="pg-detail2-inner">
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>4 KPI cards</strong> di atas: Total Pelanggan, Transaksi, Pendapatan, dan Rata-Rata Nilai. Gunakan sebagai acuan kondisi bisnis saat ini.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Grafik garis penjualan per bulan</strong> menampilkan tren bulanan. Garis putus-putus adalah rata-rata — titik di atas garis berarti bulan tersebut di atas rata-rata.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Pie chart distribusi segmen</strong> menunjukkan proporsi Low, Medium, High, dan Dormant High Spender.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Bar chart produk terlaris</strong> bisa diatur jumlah Top N-nya. Gunakan untuk menentukan prioritas stok dan promosi.</p></div>
+            </div>
+            <div class="pg-detail2-tip">Filter Provinsi dan Bulan di pojok kanan atas berlaku untuk semua visualisasi sekaligus.</div>
+          </div>
+        </div>
+
+        <!-- 2. Segmentasi Pelanggan -->
+        <div class="pg-card2">
+          <div class="pg-thumb2">
+            <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+              <rect width="480" height="270" rx="6" fill="#f0f4ee"/>
+              <rect x="0" y="0" width="480" height="42" rx="6" fill="#1a7a10"/>
+              <rect x="0" y="36" width="480" height="6" fill="#1a7a10"/>
+              <text x="22" y="19" font-size="10.5" fill="rgba(255,255,255,0.55)" font-family="system-ui">Dashboard Analisis Pelanggan</text>
+              <text x="22" y="33" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui">Perilaku Pelanggan &amp; Insight Produk</text>
+              <!-- Heatmap kiri atas -->
+              <rect x="14" y="52" width="220" height="108" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="124" y="65" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Perbandingan Rata-Rata Nilai Segmen</text>
+              <text x="34" y="81" font-size="7" fill="#888" font-family="system-ui">Low Spender</text>
+              <rect x="96" y="72" width="60" height="13" rx="2" fill="#c8e6c0"/>
+              <rect x="162" y="72" width="30" height="13" rx="2" fill="#4d9e3a"/>
+              <rect x="198" y="72" width="28" height="13" rx="2" fill="#e08a3a"/>
+              <text x="34" y="97" font-size="7" fill="#888" font-family="system-ui">Med Spender</text>
+              <rect x="96" y="88" width="60" height="13" rx="2" fill="#b2d9a8"/>
+              <rect x="162" y="88" width="30" height="13" rx="2" fill="#3a8a2e"/>
+              <rect x="198" y="88" width="28" height="13" rx="2" fill="#e07030"/>
+              <text x="34" y="113" font-size="7" fill="#888" font-family="system-ui">High Spender</text>
+              <rect x="96" y="104" width="60" height="13" rx="2" fill="#d4eec8"/>
+              <rect x="162" y="104" width="30" height="13" rx="2" fill="#5aae46"/>
+              <rect x="198" y="104" width="28" height="13" rx="2" fill="#d06820"/>
+              <text x="26" y="130" font-size="6.5" fill="#888" font-family="system-ui">Dormant High</text>
+              <rect x="96" y="120" width="60" height="13" rx="2" fill="#1a7a10" opacity="0.85"/>
+              <rect x="162" y="120" width="30" height="13" rx="2" fill="#88cc74"/>
+              <rect x="198" y="120" width="28" height="13" rx="2" fill="#c05818"/>
+              <text x="98" y="150" font-size="7" fill="#aaa" font-family="system-ui">Recency</text>
+              <text x="164" y="150" font-size="7" fill="#aaa" font-family="system-ui">Freq</text>
+              <text x="196" y="150" font-size="7" fill="#aaa" font-family="system-ui">Monetary</text>
+              <!-- Pie kanan atas -->
+              <rect x="242" y="52" width="224" height="108" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="354" y="65" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Kontribusi Pendapatan per Segmen</text>
+              <circle cx="320" cy="108" r="36" fill="none" stroke="#3B9E1A" stroke-width="21" stroke-dasharray="83 144" stroke-dashoffset="10"/>
+              <circle cx="320" cy="108" r="36" fill="none" stroke="#f0b429" stroke-width="21" stroke-dasharray="54 173" stroke-dashoffset="-73"/>
+              <circle cx="320" cy="108" r="36" fill="none" stroke="#e05a2a" stroke-width="21" stroke-dasharray="18 209" stroke-dashoffset="-127"/>
+              <circle cx="320" cy="108" r="36" fill="none" stroke="#4a7abf" stroke-width="21" stroke-dasharray="8 219" stroke-dashoffset="-145"/>
+              <text x="374" y="85" font-size="7.5" fill="#555" font-family="system-ui">Low: 36.71%</text>
+              <text x="374" y="99" font-size="7.5" fill="#555" font-family="system-ui">Med: 33.48%</text>
+              <text x="374" y="113" font-size="7.5" fill="#555" font-family="system-ui">High: 25.13%</text>
+              <text x="374" y="127" font-size="7.5" fill="#555" font-family="system-ui">Dormant: 4.68%</text>
+              <!-- bar provinsi -->
+              <rect x="14" y="168" width="220" height="90" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="124" y="181" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Distribusi Segmen per Provinsi</text>
+              <text x="24" y="197" font-size="7" fill="#888" font-family="system-ui">Jawa Timur</text>
+              <rect x="82" y="189" width="138" height="10" rx="2" fill="#3B9E1A" opacity="0.85"/>
+              <text x="24" y="211" font-size="7" fill="#888" font-family="system-ui">Jawa Barat</text>
+              <rect x="82" y="203" width="98" height="10" rx="2" fill="#3B9E1A" opacity="0.65"/>
+              <text x="24" y="225" font-size="7" fill="#888" font-family="system-ui">DKI Jakarta</text>
+              <rect x="82" y="217" width="68" height="10" rx="2" fill="#3B9E1A" opacity="0.45"/>
+              <text x="24" y="239" font-size="7" fill="#888" font-family="system-ui">Jawa Tengah</text>
+              <rect x="82" y="231" width="50" height="10" rx="2" fill="#3B9E1A" opacity="0.35"/>
+              <text x="24" y="253" font-size="7" fill="#888" font-family="system-ui">Banten</text>
+              <rect x="82" y="245" width="40" height="10" rx="2" fill="#3B9E1A" opacity="0.3"/>
+              <!-- peta -->
+              <rect x="242" y="168" width="224" height="90" rx="4" fill="#b8d4e8" stroke="#dde0d9" stroke-width="1"/>
+              <text x="354" y="181" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Sebaran Pendapatan per Provinsi</text>
+              <ellipse cx="354" cy="232" rx="82" ry="17" fill="#d4a855" opacity="0.5"/>
+              <ellipse cx="370" cy="224" rx="32" ry="11" fill="#e07030" opacity="0.65"/>
+              <ellipse cx="318" cy="236" rx="22" ry="9" fill="#e07030" opacity="0.5"/>
+              <ellipse cx="420" cy="227" rx="17" ry="9" fill="#e08a3a" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="pg-footer">
+            <div class="pg-title-row"><div class="pg-green-dot"></div><div class="pg-page-name">Segmentasi Pelanggan</div></div>
+            <button class="pg-btn" onclick="toggleDetail2(this)">Lihat Penjelasan <svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></button>
+          </div>
+          <div class="pg-detail2">
+            <div class="pg-detail2-inner">
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Tabel heatmap</strong> membandingkan rata-rata Recency, Frequency, dan Monetary tiap segmen. Warna lebih gelap = nilai lebih tinggi.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Pie chart kontribusi pendapatan</strong> menunjukkan segmen mana yang menyumbang terbesar. Dormant High Spender kecil jumlahnya tapi kontribusi nilai sangat besar.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Bar chart per provinsi</strong> bisa diatur Top N-nya. Gunakan untuk melihat konsentrasi pelanggan di wilayah tertentu.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Peta sebaran</strong> mewarnai wilayah sesuai intensitas pendapatan. Warna lebih gelap = kontribusi lebih besar.</p></div>
+            </div>
+            <div class="pg-detail2-tip">Filter Segmen Pelanggan di pojok kanan atas untuk fokus pada satu segmen di semua visualisasi halaman ini.</div>
+          </div>
+        </div>
+
+        <!-- 3. Perilaku Pelanggan (dulu "Ringkasan Utama") -->
+        <div class="pg-card2">
+          <div class="pg-thumb2">
+            <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+              <rect width="480" height="270" rx="6" fill="#f0f4ee"/>
+              <rect x="0" y="0" width="480" height="42" rx="6" fill="#1a7a10"/>
+              <rect x="0" y="36" width="480" height="6" fill="#1a7a10"/>
+              <text x="22" y="19" font-size="10.5" fill="rgba(255,255,255,0.55)" font-family="system-ui">Dashboard Analisis Pelanggan</text>
+              <text x="22" y="33" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui">Perilaku Pelanggan &amp; Insight Produk</text>
+              <!-- 4 KPI atas -->
+              <rect x="14" y="52" width="106" height="42" rx="4" fill="#3B9E1A" opacity="0.85"/>
+              <text x="67" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Bernilai Tinggi</text>
+              <text x="67" y="84" font-size="16" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">17</text>
+              <rect x="126" y="52" width="106" height="42" rx="4" fill="#2d8c18" opacity="0.85"/>
+              <text x="179" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Berisiko Tidak Aktif</text>
+              <text x="179" y="84" font-size="16" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">32</text>
+              <rect x="238" y="52" width="106" height="42" rx="4" fill="#1a7a10" opacity="0.85"/>
+              <text x="291" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Potensi Naik Segmen</text>
+              <text x="291" y="84" font-size="16" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">29</text>
+              <rect x="350" y="52" width="116" height="42" rx="4" fill="#4a7abf"/>
+              <text x="408" y="68" font-size="7.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Akurasi Model</text>
+              <text x="408" y="84" font-size="16" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">0.9858</text>
+              <!-- tabel prioritas kiri -->
+              <rect x="14" y="102" width="240" height="156" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="134" y="116" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Pelanggan Prioritas Intervensi</text>
+              <rect x="22" y="121" width="224" height="13" rx="2" fill="#3B9E1A"/>
+              <text x="50" y="130" font-size="6.5" fill="#fff" font-family="system-ui">No</text>
+              <text x="88" y="130" font-size="6.5" fill="#fff" font-family="system-ui">SK Customer</text>
+              <text x="154" y="130" font-size="6.5" fill="#fff" font-family="system-ui">Segmen</text>
+              <text x="218" y="130" font-size="6.5" fill="#fff" font-family="system-ui">Rek.</text>
+              <rect x="22" y="136" width="224" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="22" y="149" width="224" height="11" rx="1" fill="#fff"/>
+              <rect x="22" y="162" width="224" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="22" y="175" width="224" height="11" rx="1" fill="#fff"/>
+              <rect x="22" y="188" width="224" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="22" y="201" width="224" height="11" rx="1" fill="#fff"/>
+              <rect x="22" y="214" width="224" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="22" y="227" width="224" height="11" rx="1" fill="#fff"/>
+              <rect x="22" y="240" width="224" height="11" rx="1" fill="#f5f5f5"/>
+              <!-- bar distribusi rekomendasi kanan -->
+              <rect x="260" y="102" width="206" height="156" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="363" y="116" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Distribusi Rekomendasi</text>
+              <text x="270" y="142" font-size="7" fill="#888" font-family="system-ui">Regular Eng.</text>
+              <rect x="340" y="131" width="96" height="15" rx="2" fill="#3B9E1A" opacity="0.8"/>
+              <text x="440" y="142" font-size="7" fill="#555" font-family="system-ui">98.41%</text>
+              <text x="270" y="168" font-size="7" fill="#888" font-family="system-ui">Upselling</text>
+              <rect x="340" y="157" width="8" height="15" rx="2" fill="#2d8c18" opacity="0.7"/>
+              <text x="352" y="168" font-size="7" fill="#555" font-family="system-ui">1.36%</text>
+              <text x="270" y="194" font-size="7" fill="#888" font-family="system-ui">Retention</text>
+              <rect x="340" y="183" width="3" height="15" rx="1" fill="#1a7a10" opacity="0.6"/>
+              <text x="347" y="194" font-size="7" fill="#555" font-family="system-ui">0.19%</text>
+              <text x="270" y="220" font-size="7" fill="#888" font-family="system-ui">Preventive</text>
+              <rect x="340" y="209" width="2" height="15" rx="1" fill="#4a7abf" opacity="0.5"/>
+              <text x="346" y="220" font-size="7" fill="#555" font-family="system-ui">0.05%</text>
+            </svg>
+          </div>
+          <div class="pg-footer">
+            <div class="pg-title-row"><div class="pg-green-dot"></div><div class="pg-page-name">Perilaku Pelanggan</div></div>
+            <button class="pg-btn" onclick="toggleDetail2(this)">Lihat Penjelasan <svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></button>
+          </div>
+          <div class="pg-detail2">
+            <div class="pg-detail2-inner">
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>3 KPI cards pertama</strong>: jumlah pelanggan bernilai tinggi, berisiko tidak aktif, dan berpotensi naik segmen — prioritaskan tindakan pada kelompok "berisiko" terlebih dahulu.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>KPI Akurasi Model (0.9858)</strong> menunjukkan tingkat kepercayaan model prediksi segmentasi. Nilai mendekati 1 berarti segmentasi sangat akurat.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Tabel pelanggan prioritas</strong> berisi SK Customer, segmen, dan rekomendasi aksi. Klik baris untuk melihat profil lengkap di halaman Detail Pelanggan.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Bar chart distribusi rekomendasi</strong>: ~98% pelanggan cukup Regular Engagement, sisanya butuh Upselling atau Retention Campaign.</p></div>
+            </div>
+            <div class="pg-detail2-tip">Gunakan filter Rekomendasi di pojok kanan atas untuk memfilter tabel berdasarkan tipe rekomendasi tertentu.</div>
+          </div>
+        </div>
+
+        <!-- 4. Insight Produk -->
+        <div class="pg-card2">
+          <div class="pg-thumb2">
+            <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+              <rect width="480" height="270" rx="6" fill="#f0f4ee"/>
+              <rect x="0" y="0" width="480" height="42" rx="6" fill="#1a7a10"/>
+              <rect x="0" y="36" width="480" height="6" fill="#1a7a10"/>
+              <text x="22" y="19" font-size="10.5" fill="rgba(255,255,255,0.55)" font-family="system-ui">Dashboard Analisis Pelanggan</text>
+              <text x="22" y="33" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui">Perilaku Pelanggan &amp; Insight Produk</text>
+              <!-- network graph -->
+              <rect x="14" y="52" width="290" height="130" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="159" y="66" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Relasi Antar Komponen</text>
+              <circle cx="130" cy="105" r="22" fill="#3B9E1A" opacity="0.8"/>
+              <circle cx="186" cy="96" r="28" fill="#e08a3a" opacity="0.8"/>
+              <circle cx="244" cy="104" r="18" fill="#4a7abf" opacity="0.8"/>
+              <line x1="152" y1="103" x2="158" y2="100" stroke="#aaa" stroke-width="1.5"/>
+              <line x1="214" y1="98" x2="226" y2="102" stroke="#aaa" stroke-width="1.5"/>
+              <circle cx="100" cy="148" r="12" fill="#888" opacity="0.6"/>
+              <circle cx="148" cy="154" r="15" fill="#c0392b" opacity="0.7"/>
+              <circle cx="192" cy="148" r="13" fill="#c0392b" opacity="0.6"/>
+              <line x1="112" y1="148" x2="133" y2="151" stroke="#aaa" stroke-width="1"/>
+              <line x1="163" y1="152" x2="179" y2="149" stroke="#aaa" stroke-width="1"/>
+              <text x="88" y="94" font-size="6.5" fill="#555" font-family="system-ui">Kabel 1x14</text>
+              <text x="170" y="80" font-size="6.5" fill="#555" font-family="system-ui">Konektor JST</text>
+              <text x="238" y="90" font-size="6.5" fill="#555" font-family="system-ui">JST Male</text>
+              <!-- insight strategi kanan atas -->
+              <rect x="312" y="52" width="154" height="130" rx="4" fill="#f8faf6" stroke="#dde0d9" stroke-width="1"/>
+              <text x="389" y="66" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Insight Strategi</text>
+              <rect x="322" y="76" width="134" height="8" rx="2" fill="#c8e6c0"/>
+              <rect x="322" y="90" width="134" height="8" rx="2" fill="#c8e6c0"/>
+              <rect x="322" y="104" width="134" height="8" rx="2" fill="#c8e6c0"/>
+              <rect x="322" y="118" width="134" height="8" rx="2" fill="#c8e6c0"/>
+              <rect x="322" y="132" width="134" height="8" rx="2" fill="#c8e6c0"/>
+              <rect x="322" y="146" width="94" height="8" rx="2" fill="#c8e6c0"/>
+              <!-- tabel rule bawah -->
+              <rect x="14" y="190" width="452" height="68" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="240" y="204" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Tabel Rule (Association Rules)</text>
+              <rect x="22" y="209" width="436" height="13" rx="2" fill="#e8e8e8"/>
+              <text x="120" y="219" font-size="7" fill="#666" text-anchor="middle" font-family="system-ui">Consequent</text>
+              <text x="280" y="219" font-size="7" fill="#666" text-anchor="middle" font-family="system-ui">Antecedent</text>
+              <text x="400" y="219" font-size="7" fill="#666" text-anchor="middle" font-family="system-ui">Confidence</text>
+              <text x="450" y="219" font-size="7" fill="#666" text-anchor="middle" font-family="system-ui">Lift</text>
+              <rect x="22" y="224" width="436" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="432" y="224" width="20" height="11" rx="2" fill="#4a7abf"/>
+              <rect x="22" y="237" width="436" height="11" rx="1" fill="#fff"/>
+              <rect x="432" y="237" width="20" height="11" rx="2" fill="#4a7abf" opacity="0.75"/>
+              <rect x="22" y="250" width="436" height="11" rx="1" fill="#f5f5f5"/>
+              <rect x="432" y="250" width="20" height="11" rx="2" fill="#e07030" opacity="0.7"/>
+              <text x="32" y="233" font-size="6.5" fill="#888" font-family="system-ui">Konektor JST PH 2.0mm 2 Pin Female</text>
+              <text x="32" y="246" font-size="6.5" fill="#888" font-family="system-ui">Konektor JST PH 2.0mm 2 Pin Male</text>
+              <text x="32" y="259" font-size="6.5" fill="#888" font-family="system-ui">Kabel serabut 1x14 biru (1 meter)</text>
+            </svg>
+          </div>
+          <div class="pg-footer">
+            <div class="pg-title-row"><div class="pg-green-dot"></div><div class="pg-page-name">Insight Produk</div></div>
+            <button class="pg-btn" onclick="toggleDetail2(this)">Lihat Penjelasan <svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></button>
+          </div>
+          <div class="pg-detail2">
+            <div class="pg-detail2-inner">
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Network graph</strong> menunjukkan produk yang sering dibeli bersamaan. Semakin besar lingkaran, semakin sering produk tersebut muncul dalam transaksi bersama.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Tabel Rule</strong> berisi Antecedent (pemicu), Consequent (produk ikutan), Confidence (peluang), dan Lift (kekuatan relasi). Lift &gt; 1 berarti relasi signifikan.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Panel Insight Strategi</strong> merangkum rekomendasi bisnis berdasarkan pola pembelian untuk bundling atau penempatan produk berdekatan.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Fitur Highlighter</strong> di network graph memungkinkan pencarian nama produk tertentu untuk melihat semua relasinya sekaligus.</p></div>
+            </div>
+            <div class="pg-detail2-tip">Klik node di network graph untuk menyorot koneksi produk dan memfilter baris terkait di tabel rule secara otomatis.</div>
+          </div>
+        </div>
+
+        <!-- 5. Detail Pelanggan — lebar penuh -->
+        <div class="pg-card2" style="grid-column:1/-1">
+          <div class="pg-thumb2">
+            <svg viewBox="0 0 960 260" xmlns="http://www.w3.org/2000/svg">
+              <rect width="960" height="260" rx="6" fill="#f0f4ee"/>
+              <rect x="0" y="0" width="960" height="42" rx="6" fill="#1a7a10"/>
+              <rect x="0" y="36" width="960" height="6" fill="#1a7a10"/>
+              <text x="22" y="19" font-size="10.5" fill="rgba(255,255,255,0.55)" font-family="system-ui">Dashboard Analisis Pelanggan</text>
+              <text x="22" y="33" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui">Perilaku Pelanggan &amp; Insight Produk</text>
+              <!-- profil kiri -->
+              <rect x="14" y="52" width="310" height="116" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="169" y="66" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Profil Pelanggan</text>
+              <rect x="24" y="74" width="140" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="86" width="200" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="98" width="180" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="110" width="170" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="122" width="195" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="134" width="185" height="7" rx="2" fill="#e8e8e8"/>
+              <rect x="24" y="146" width="190" height="7" rx="2" fill="#e8e8e8"/>
+              <!-- 4 KPI kanan atas -->
+              <rect x="332" y="52" width="148" height="56" rx="4" fill="#3B9E1A"/>
+              <text x="406" y="71" font-size="8.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Total Nilai Belanja</text>
+              <text x="406" y="94" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">8,002,000</text>
+              <rect x="488" y="52" width="148" height="56" rx="4" fill="#4a7abf"/>
+              <text x="562" y="71" font-size="8.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Total Transaksi</text>
+              <text x="562" y="94" font-size="22" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">1</text>
+              <rect x="644" y="52" width="148" height="56" rx="4" fill="#4a7abf"/>
+              <text x="718" y="71" font-size="8.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Jarak Transaksi</text>
+              <text x="718" y="94" font-size="22" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">8</text>
+              <rect x="800" y="52" width="146" height="56" rx="4" fill="#3B9E1A"/>
+              <text x="873" y="71" font-size="8.5" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-family="system-ui">Rata-Rata Transaksi</text>
+              <text x="873" y="94" font-size="14" fill="#fff" text-anchor="middle" font-weight="600" font-family="system-ui">8,002,000</text>
+              <!-- tren bawah kiri -->
+              <rect x="14" y="176" width="460" height="74" rx="4" fill="#fff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="244" y="190" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Tren Transaksi Pelanggan</text>
+              <rect x="140" y="204" width="300" height="36" rx="3" fill="#3B9E1A" opacity="0.75"/>
+              <text x="290" y="225" font-size="8" fill="#fff" text-anchor="middle" font-family="system-ui">Jetson Nano Development Kit B01</text>
+              <!-- rekomendasi -->
+              <rect x="482" y="176" width="464" height="74" rx="4" fill="#f5f8ff" stroke="#dde0d9" stroke-width="1"/>
+              <text x="714" y="190" font-size="8.5" fill="#333" text-anchor="middle" font-family="system-ui" font-weight="500">Rekomendasi Pelanggan</text>
+              <rect x="494" y="200" width="440" height="7" rx="2" fill="#dde0d9"/>
+              <rect x="494" y="213" width="400" height="7" rx="2" fill="#dde0d9"/>
+              <rect x="494" y="226" width="420" height="7" rx="2" fill="#dde0d9"/>
+              <rect x="494" y="239" width="360" height="7" rx="2" fill="#dde0d9"/>
+              <!-- KPI 2-4 bawah kiri (lanjutan) -->
+              <rect x="332" y="116" width="148" height="52" rx="4" fill="#f8faf8" stroke="#dde0d9" stroke-width="1"/>
+              <rect x="488" y="116" width="148" height="52" rx="4" fill="#f8faf8" stroke="#dde0d9" stroke-width="1"/>
+              <rect x="644" y="116" width="148" height="52" rx="4" fill="#f8faf8" stroke="#dde0d9" stroke-width="1"/>
+              <rect x="800" y="116" width="146" height="52" rx="4" fill="#f8faf8" stroke="#dde0d9" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="pg-footer">
+            <div class="pg-title-row"><div class="pg-green-dot"></div><div class="pg-page-name">Detail Pelanggan</div></div>
+            <button class="pg-btn" onclick="toggleDetail2(this)">Lihat Penjelasan <svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></button>
+          </div>
+          <div class="pg-detail2">
+            <div class="pg-detail2-inner" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Profil pelanggan</strong> menampilkan data lengkap: SK Customer, nama, provinsi, kota, segmen, tanggal transaksi pertama dan terakhir, serta nomor telepon.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>4 KPI cards</strong>: Total Nilai Belanja, Total Transaksi, Jarak Transaksi Terakhir (hari), dan Rata-Rata Nilai Transaksi untuk pelanggan yang dipilih.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Grafik tren transaksi</strong> menampilkan produk yang pernah dibeli beserta kuantitasnya — berguna untuk memahami preferensi produk individual.</p></div>
+              <div class="pg-detail2-item"><div class="pg-detail2-dot"></div><p><strong>Panel rekomendasi</strong> memberikan saran aksi spesifik (upselling, bundling, retensi) berdasarkan profil dan segmen pelanggan yang sedang dilihat.</p></div>
+            </div>
+            <div class="pg-detail2-tip" style="margin:0 16px 12px">Klik nama atau ID pelanggan di halaman Perilaku Pelanggan untuk langsung melompat ke profil pelanggan di halaman ini.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -275,56 +620,12 @@ nav{
     <div class="prod-section">
       <h3>Produk &amp; Spesialisasi</h3>
       <div class="prod-tags">
-        <span class="prod-tag hl">Mikrokontroler</span>
-        <span class="prod-tag hl">Mikroprosesor</span>
-        <span class="prod-tag hl">Sensor</span>
-        <span class="prod-tag hl">Robotika</span>
-        <span class="prod-tag hl">GPS &amp; RFID</span>
-        <span class="prod-tag hl">Embedded Module (IoT)</span>
-        <span class="prod-tag hl">Voice Recognition</span>
-        <span class="prod-tag hl">CMUcam</span>
-        <span class="prod-tag">Komponen elektronik umum</span>
-        <span class="prod-tag">Dukungan teknis</span>
-        <span class="prod-tag">Datasheet komponen</span>
-        <span class="prod-tag">Outsourcing komponen langka</span>
+        <span class="prod-tag hl">Mikrokontroler</span><span class="prod-tag hl">Mikroprosesor</span><span class="prod-tag hl">Sensor</span><span class="prod-tag hl">Robotika</span><span class="prod-tag hl">GPS &amp; RFID</span><span class="prod-tag hl">Embedded Module (IoT)</span><span class="prod-tag hl">Voice Recognition</span><span class="prod-tag hl">CMUcam</span><span class="prod-tag">Komponen elektronik umum</span><span class="prod-tag">Dukungan teknis</span><span class="prod-tag">Datasheet komponen</span><span class="prod-tag">Outsourcing komponen langka</span>
       </div>
     </div>
     <div class="motto-box">
       <div class="motto-icon"><svg viewBox="0 0 18 18"><polygon points="9,2 11.5,7 17,7.5 13,11.5 14.5,17 9,14 3.5,17 5,11.5 1,7.5 6.5,7"/></svg></div>
-      <div class="motto-text">
-        <div class="mt">"Unlimited Innovation"</div>
-        <div class="ms">Inovasi tanpa batas demi kepuasan pelanggan — moto DigiWare</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DOKUMENTASI -->
-<div id="page-docs" class="page">
-  <div class="docs-wrap">
-    <h2>Dokumentasi</h2>
-    <p class="sub">Panduan dan referensi untuk penggunaan dashboard analisis pelanggan DigiWare.</p>
-    <div class="doc-section">
-      <h3>Mulai dari sini</h3>
-      <div class="doc-items">
-        <div class="doc-item"><div><h4>Gambaran umum sistem</h4><p>Cara kerja dashboard analisis pelanggan DigiWare</p></div><span class="doc-pill guide">Panduan</span></div>
-        <div class="doc-item"><div><h4>Menghubungkan sumber data</h4><p>Sinkronisasi data transaksi dari sistem penjualan</p></div><span class="doc-pill new">Baru</span></div>
-        <div class="doc-item"><div><h4>Navigasi dashboard</h4><p>Cara membaca dan menggunakan visualisasi Tableau</p></div><span class="doc-pill guide">Panduan</span></div>
-      </div>
-    </div>
-    <div class="doc-section">
-      <h3>Modul analitik</h3>
-      <div class="doc-items">
-        <div class="doc-item"><div><h4>Segmentasi RFM</h4><p>Penjelasan penilaian recency, frequency, dan monetary</p></div><span class="doc-pill ref">Referensi</span></div>
-        <div class="doc-item"><div><h4>Kohort perilaku</h4><p>Melacak kelompok pelanggan di berbagai periode waktu</p></div><span class="doc-pill ref">Referensi</span></div>
-        <div class="doc-item"><div><h4>Prediksi churn</h4><p>Cara sinyal pelanggan berisiko dihitung dan diinterpretasikan</p></div><span class="doc-pill new">Baru</span></div>
-      </div>
-    </div>
-    <div class="doc-section">
-      <h3>Integrasi</h3>
-      <div class="doc-items">
-        <div class="doc-item"><div><h4>Panduan embed Tableau</h4><p>Cara menyematkan dashboard ke portal internal</p></div><span class="doc-pill guide">Panduan</span></div>
-      </div>
+      <div class="motto-text"><div class="mt">"Unlimited Innovation"</div><div class="ms">Inovasi tanpa batas demi kepuasan pelanggan — moto DigiWare</div></div>
     </div>
   </div>
 </div>
@@ -346,5 +647,17 @@ function showPage(id){
     v.parentNode.insertBefore(s,v);
   }
 }
+function toggleDetail2(btn){
+  var card=btn.closest('.pg-card2');
+  var detail=card.querySelector('.pg-detail2');
+  var isOpen=detail.classList.contains('open');
+  detail.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+  var nodes=btn.childNodes;
+  for(var i=0;i<nodes.length;i++){
+    if(nodes[i].nodeType===3){
+      nodes[i].textContent=isOpen?'Lihat Penjelasan ':'Sembunyikan Penjelasan ';
+    }
+  }
+}
 </script>
-</html>
