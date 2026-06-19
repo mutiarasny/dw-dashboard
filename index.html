@@ -1,4 +1,3 @@
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -136,9 +135,41 @@ nav{background:var(--dw-surface);height:60px;display:flex;align-items:center;jus
 .motto-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .motto-text .mt{font-size:15px;font-weight:500;color:#fff;margin-bottom:3px}
 .motto-text .ms{font-size:12px;color:rgba(255,255,255,0.7)}
+
+/* Login gate */
+.dw-login-gate{position:fixed;inset:0;background:var(--dw-bg);display:flex;align-items:center;justify-content:center;z-index:1000;padding:1rem}
+.dw-login-card{background:var(--dw-surface);border:0.5px solid var(--dw-border);border-radius:14px;padding:2.5rem 2.25rem;max-width:340px;width:100%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+.dw-login-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1.25rem}
+.dw-login-sub{font-size:13px;color:var(--dw-muted);margin-bottom:1.75rem;line-height:1.6}
+.dw-login-input{width:100%;padding:10px 14px;border:1px solid var(--dw-border);border-radius:7px;font-size:14px;font-family:inherit;margin-bottom:12px;outline:none;transition:border-color 0.15s}
+.dw-login-input:focus{border-color:var(--dw-green)}
+.dw-login-btn{width:100%;margin-top:2px}
+.dw-login-error{font-size:12px;color:#c0392b;margin-top:12px;line-height:1.5}
+
+/* Logout button */
+.nav-logout{background:none;border:0.5px solid var(--dw-border);padding:5px 12px;border-radius:6px;font-size:12px;color:var(--dw-muted);cursor:pointer;font-family:inherit;transition:all 0.15s}
+.nav-logout:hover{color:var(--dw-text);border-color:var(--dw-green)}
 </style>
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">DigiWare</h2>
+
+<!-- LOGIN GATE -->
+<div id="dw-login-gate" class="dw-login-gate">
+  <div class="dw-login-card">
+    <div class="dw-login-logo">
+      <div class="logo-icon"><svg viewBox="0 0 18 18"><polyline points="2,13 6,8 10,11 16,4"/><polyline points="12,4 16,4 16,8"/></svg></div>
+      <span class="logo-text">Digi<span>Ware</span></span>
+    </div>
+    <p class="dw-login-sub">Masuk untuk mengakses dashboard internal</p>
+    <form id="dw-login-form" onsubmit="return dwHandleLogin(event)">
+      <input type="password" id="dw-login-password" class="dw-login-input" placeholder="Masukkan password" autocomplete="current-password" required>
+      <button type="submit" class="btn-primary dw-login-btn">Masuk</button>
+      <p id="dw-login-error" class="dw-login-error" style="display:none">Password salah, coba lagi.</p>
+    </form>
+  </div>
+</div>
+
+<div id="dw-app" style="display:none">
 <nav>
   <div class="nav-left">
     <div class="logo-wrap" onclick="showPage('home')">
@@ -154,6 +185,7 @@ nav{background:var(--dw-surface);height:60px;display:flex;align-items:center;jus
   </div>
   <div class="nav-right">
     <span class="nav-badge">Internal</span>
+    <button class="nav-logout" onclick="dwLogout()">Keluar</button>
     <div class="nav-user">DW</div>
   </div>
 </nav>
@@ -630,6 +662,8 @@ nav{background:var(--dw-surface);height:60px;display:flex;align-items:center;jus
   </div>
 </div>
 
+</div>
+
 <script>
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -659,5 +693,50 @@ function toggleDetail2(btn){
       nodes[i].textContent=isOpen?'Lihat Penjelasan ':'Sembunyikan Penjelasan ';
     }
   }
+}
+
+/* ===== Login gate ===== */
+// GANTI hash di bawah ini dengan password kamu sendiri.
+// Cara generate hash baru: buka console browser (F12), lalu jalankan
+// crypto.subtle.digest('SHA-256', new TextEncoder().encode('PASSWORD_BARU')).then(b=>console.log(Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')))
+// lalu copy hasilnya ke variabel DW_PASSWORD_HASH di bawah.
+// Password default saat ini: digiware123
+var DW_PASSWORD_HASH = '6202fa17e735010cf9404794a61aa6635f9ab723e70dc76379c36f06a6d1efc';
+var DW_AUTH_KEY = 'dw_authenticated';
+
+async function dwSha256(text){
+  var enc = new TextEncoder().encode(text);
+  var buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+}
+
+async function dwHandleLogin(e){
+  e.preventDefault();
+  var input = document.getElementById('dw-login-password');
+  var errorEl = document.getElementById('dw-login-error');
+  var hash = await dwSha256(input.value);
+  if(hash === DW_PASSWORD_HASH){
+    localStorage.setItem(DW_AUTH_KEY, '1');
+    dwShowApp();
+  } else {
+    errorEl.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+  return false;
+}
+
+function dwShowApp(){
+  document.getElementById('dw-login-gate').style.display = 'none';
+  document.getElementById('dw-app').style.display = '';
+}
+
+function dwLogout(){
+  localStorage.removeItem(DW_AUTH_KEY);
+  location.reload();
+}
+
+if(localStorage.getItem(DW_AUTH_KEY) === '1'){
+  dwShowApp();
 }
 </script>
